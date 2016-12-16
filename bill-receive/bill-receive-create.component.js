@@ -22,13 +22,13 @@ window.billReceiveCreateComponent = Vue.extend({
         return {
             formType: 'insert',
             names: [
-                'Conta de luz',
-                'Conta de água',
-                'Conta de telefone',
-                'Supermercado',
-                'Cartão de crédito',
+                'Receber 1',
+                'Cliente 2',
+                'Prêmio',
+                'Crédito',
+                'Sal',
                 'Empréstimo',
-                'Gasolina'
+                'Venda'
             ],
             bill: {
                 date_due: '',
@@ -40,7 +40,7 @@ window.billReceiveCreateComponent = Vue.extend({
         };
     },
     created: function(){
-        if(this.$route.name == 'bill.update'){
+        if(this.$route.name == 'bill-receive.update'){
             this.formType = 'update';
             this.getBill(this.$route.params.index); //:index da rota update
         }
