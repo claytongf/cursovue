@@ -9,10 +9,10 @@ window.dashboard = Vue.extend({
             }
         </style>
         <h1>{{ title }}</h1>
-        <p>Total de Contas a Pagar: {{ total.pay | currency 'R$ ' 2 }}</p>
-        <p>Total de Contas Pagas: {{ total.payed | currency 'R$ ' 2 }}</p>
-        <p>Total de Contas a Receber: {{ total.receive | currency 'R$ ' 2 }} </p>
-        <p>Total de Contas Recebidas: {{ total.received | currency 'R$ ' 2 }}</p>
+        <p>Total de Contas a Pagar: {{ total.pay | numberFormat }}</p>
+        <p>Total de Contas Pagas: {{ total.payed | numberFormat }}</p>
+        <p>Total de Contas a Receber: {{ total.receive | numberFormat }} </p>
+        <p>Total de Contas Recebidas: {{ total.received | numberFormat }}</p>
     `,
     data: function (){
         return {
@@ -26,7 +26,7 @@ window.dashboard = Vue.extend({
         };
     },
     created: function(){
-        var self = this;
+        let self = this;
         BillReceive.total().then(function(response){
             self.total.receive = response.data.total
         });

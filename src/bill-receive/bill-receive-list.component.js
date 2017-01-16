@@ -1,4 +1,4 @@
-window.billPayListComponent = Vue.extend({
+window.billReceiveListComponent = Vue.extend({
     template: `
         <style type="text/css">
             .pago{
@@ -22,36 +22,34 @@ window.billPayListComponent = Vue.extend({
             <tbody>
             <tr v-for="(index,o) in bills">
                 <td>{{ index + 1 }}</td>
-                <td>{{ o.date_due }}</td>
+                <td>{{ o.date_due | dateFormat 'pt-BR'}}</td>
                 <td>{{ o.name }}</td>
-                <td>{{ o.value | currency 'R$ ' 2 }}</td>
+                <td>{{ o.value | numberFormat 'pt-BR' 'BRL' }}</td>
                 <td class="minha-classe" :class="{'pago': o.done, 'nao-pago': !o.done}">{{ o.done | doneLabel }}</td>
                 <td>
-                    <a href="#" v-link="{name: 'bill-pay.update', params: {id: o.id}}">Editar</a> |
+                    <a href="#" v-link="{name: 'bill-receive.update', params: {id: o.id}}">Editar</a> |
                     <a href="#" @click.prevent="deleteBill(o)">Deletar</a>
                 </td>
             </tr>
             </tbody>
         </table>
     `,
-    data: function (){
+    data(){
         return {
             bills: []
         };
     },
-    created: function(){
-        var self = this;
-        BillPay.query().then(function(response){
-            self.bills = response.data;
+    created(){
+        BillReceive.query().then((response) => {
+            this.bills = response.data;
         })
     },
     methods: {
-        deleteBill: function(bill){
+        deleteBill(bill){
             if(confirm('Deseja excluir esta conta?')){
-                var self = this;
-                BillPay.delete({id: bill.id}).then(function(response){
-                    self.bills.$remove(bill);
-                    self.$dispatch('change-info');
+                BillReceive.delete({id: bill.id}).then((response) => {
+                    this.bills.$remove(bill);
+                    this.$dispatch('change-info');
                 });
 
             }

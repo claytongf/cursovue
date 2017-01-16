@@ -9,7 +9,7 @@ window.billReceiveMenuComponent = Vue.extend({
         </nav>
         <router-view></router-view>
     `,
-    data: function(){
+    data(){
         return {
             menus: [
                 {id: 0, name: "Listar contas", routeName: 'bill-receive.list'},

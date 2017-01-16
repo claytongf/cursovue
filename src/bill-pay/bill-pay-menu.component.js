@@ -1,4 +1,4 @@
-window.billComponent = Vue.extend({
+window.billPayMenuComponent = Vue.extend({
     template: `
         <nav>
             <ul>
@@ -10,12 +10,13 @@ window.billComponent = Vue.extend({
         </nav>
         <router-view></router-view>
     `,
-    data: function(){
+    data(){
         return {
             menus: [
-                {id: 0, name: "Dashboard", routeName: 'bill.dashboard'},
-                {name: "Contas a pagar", routeName: 'bill-pay.list'},
-                {name: "Contas a receber", routeName: 'bill-receive.list'}
+                // {id: 0, name: "Listar contas", url: '/bills'},
+                // {id: 1, name: "Criar conta", url: '/bill/create'}
+                {id: 0, name: "Listar contas", routeName: 'bill-pay.list'},
+                {id: 1, name: "Criar conta", routeName: 'bill-pay.create'}
             ],
         };
     }
