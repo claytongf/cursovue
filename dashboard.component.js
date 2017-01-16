@@ -9,14 +9,20 @@ window.dashboard = Vue.extend({
             }
         </style>
         <h1>{{ title }}</h1>
-        <p>Total de Contas a Pagar: {{ totalBillsPay | currency 'R$ ' 2 }}</p>
-        <p>Total de Contas Pagas: {{ totalBillsPayDone | currency 'R$ ' 2 }}</p>
-        <p>Total de Contas a Receber: {{ totalBillsReceive | currency 'R$ ' 2 }} </p>
-        <p>Total de Contas Recebidas: {{ totalBillsReceiveDone | currency 'R$ ' 2 }}</p>
+        <p>Total de Contas a Pagar: {{ total.pay | currency 'R$ ' 2 }}</p>
+        <p>Total de Contas Pagas: {{ total.payed | currency 'R$ ' 2 }}</p>
+        <p>Total de Contas a Receber: {{ total.receive | currency 'R$ ' 2 }} </p>
+        <p>Total de Contas Recebidas: {{ total.received | currency 'R$ ' 2 }}</p>
     `,
     data: function (){
         return {
-            title: "Dashboard"
+            title: "Dashboard",
+            total: {
+                received: 0,
+                receive: 0,
+                pay: 0,
+                payed: 0
+            }
         };
     },
     methods: {
@@ -26,46 +32,22 @@ window.dashboard = Vue.extend({
             }
         }
     },
-    computed: {
-        totalBillsPay: function(){
-            var total = 0;
-            var bills = this.$root.$children[0].billsPay;
-            for(var o in bills){
-                if(bills[o].done === false){
-                    total += bills[o].value;
-                }
-            }
-            return total;
-        },
-        totalBillsPayDone: function(){
-            var total = 0;
-            var bills = this.$root.$children[0].billsPay;
-            for(var o in bills){
-                if(bills[o].done === true){
-                    total += bills[o].value;
-                }
-            }
-            return total;
-        },
-        totalBillsReceive: function(){
-            var total = 0;
-            var bills = this.$root.$children[0].billsReceive;
-            for(var o in bills){
-                if(bills[o].done === false) {
-                    total += bills[o].value;
-                }
-            }
-            return total;
-        },
-        totalBillsReceiveDone: function(){
-            var total = 0;
-            var bills = this.$root.$children[0].billsReceive;
-            for(var o in bills){
-                if(bills[o].done === true) {
-                    total += bills[o].value;
-                }
-            }
-            return total;
-        }
+    created: function(){
+        var self = this;
+        BillReceive.total().then(function(response){
+            self.total.receive = response.data.total
+        });
+
+        BillReceive.totalReceived().then(function(response){
+            self.total.received = response.data.total
+        });
+
+        BillPay.total().then(function(response){
+            self.total.pay = response.data.total
+        });
+
+        BillPay.totalPayed().then(function(response){
+            self.total.paied= response.data.total
+        });
     }
 });

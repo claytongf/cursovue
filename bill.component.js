@@ -13,11 +13,9 @@ window.billComponent = Vue.extend({
     data: function(){
         return {
             menus: [
-                // {id: 0, name: "Listar contas", url: '/bills'},
-                // {id: 1, name: "Criar conta", url: '/bill/create'}
                 {id: 0, name: "Dashboard", routeName: 'bill.dashboard'},
                 {name: "Contas a pagar", routeName: 'bill-pay.list'},
-                {name: "Contas a receber", routeName: 'bill-receive'}
+                {name: "Contas a receber", routeName: 'bill-receive.list'}
             ],
         };
     }

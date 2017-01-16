@@ -42,25 +42,30 @@ window.billPayCreateComponent = Vue.extend({
     created: function(){
         if(this.$route.name == 'bill-pay.update'){
             this.formType = 'update';
-            this.getBill(this.$route.params.index); //:index da rota update
+            this.getBill(this.$route.params.id); //:id da rota update
         }
     },
     methods: {
         submit: function(){
+            var self = this;
             if(this.formType == 'insert'){
-                this.$root.$children[0].billsPay.push(this.bill);
+                BillPay.save({}, this.bill).then(function(response){
+                    self.$dispatch('change-info');
+                    self.$router.go({name: 'bill-pay.list'});
+                });
+            }else{
+                BillPay.update({id: this.bill.id}, this.bill).then(function(response){
+                    self.$dispatch('change-info');
+                    self.$router.go({name: 'bill-pay.list'});
+                });
             }
-            this.bill = {
-                date_due: '',
-                name: '',
-                value: 0,
-                done: false
-            };
             this.$router.go({name: 'bill-pay'});
         },
-        getBill: function (index){
-            var bills = this.$root.$children[0].billsPay;
-            this.bill = bills[index];
+        getBill: function (id){
+            var self = this;
+            BillPay.get({id: id}).then(function(response){
+                self.bill = response.data;
+            });
         }
     }
 });

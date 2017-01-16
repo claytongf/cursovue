@@ -22,13 +22,13 @@ window.billReceiveCreateComponent = Vue.extend({
         return {
             formType: 'insert',
             names: [
-                'Receber 1',
-                'Cliente 2',
-                'Prêmio',
-                'Crédito',
-                'Sal',
-                'Empréstimo',
-                'Venda'
+                'Loteria',
+                'Recebimento',
+                'Aluguel',
+                'Ganhos',
+                'Salário',
+                'Herança',
+                'Outros'
             ],
             bill: {
                 date_due: '',
@@ -42,25 +42,30 @@ window.billReceiveCreateComponent = Vue.extend({
     created: function(){
         if(this.$route.name == 'bill-receive.update'){
             this.formType = 'update';
-            this.getBill(this.$route.params.index); //:index da rota update
+            this.getBill(this.$route.params.id); //:id da rota update
         }
     },
     methods: {
         submit: function(){
+            var self = this;
             if(this.formType == 'insert'){
-                this.$root.$children[0].billsReceive.push(this.bill);
+                BillReceive.save({}, this.bill).then(function(response){
+                    self.$dispatch('change-info');
+                    self.$router.go({name: 'bill-receive.list'});
+                });
+            }else{
+                BillReceive.update({id: this.bill.id}, this.bill).then(function(response){
+                    self.$dispatch('change-info');
+                    self.$router.go({name: 'bill-receive.list'});
+                });
             }
-            this.bill = {
-                date_due: '',
-                name: '',
-                value: 0,
-                done: false
-            };
             this.$router.go({name: 'bill-receive'});
         },
-        getBill: function (index){
-            var bills = this.$root.$children[0].billsReceive;
-            this.bill = bills[index];
+        getBill: function (id){
+            var self = this;
+            BillReceive.get({id: id}).then(function(response){
+                self.bill = response.data;
+            });
         }
     }
 });
