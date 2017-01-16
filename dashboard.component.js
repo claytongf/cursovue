@@ -25,13 +25,6 @@ window.dashboard = Vue.extend({
             }
         };
     },
-    methods: {
-        deleteBill: function(bill){
-            if(confirm('Deseja excluir esta conta?')){
-                this.$root.$children[0].billsPay.$remove(bill);
-            }
-        }
-    },
     created: function(){
         var self = this;
         BillReceive.total().then(function(response){
@@ -47,7 +40,7 @@ window.dashboard = Vue.extend({
         });
 
         BillPay.totalPayed().then(function(response){
-            self.total.paied= response.data.total
+            self.total.payed= response.data.total
         });
     }
 });
