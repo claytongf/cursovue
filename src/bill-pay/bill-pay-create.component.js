@@ -9,30 +9,41 @@ const namesPay = [
 ];
 window.billPayCreateComponent = Vue.extend({
     template: `
-        <form name="form" v-on:submit.prevent="submit">
-            <label>Vencimento:</label>
-            <input type="text" v-model="bill.date_due | dateFormat 'pt-BR'"/>
-            <br><br>
-            <label>Nome:</label>
-            <select v-model="bill.name">
-                <option v-for="b in names" :value="b">{{ b }}</option>
-            </select>
-            <br><br>
-            <label>Valor:</label>
-            <input type="text" v-model="bill.value | numberFormat 'pt-BR' 'BRL'"/>
-            <br><br>
-            <label>Pago?</label>
-            <input type="checkbox" v-model="bill.done"/>
-            <br><br>
-            <input type="submit" value="Enviar"/>
-        </form>
+        <div class="container">
+            <div class="row">
+                <form name="form" v-on:submit.prevent="submit">
+                    <div class="row">
+                        <div class="input-field col s4">
+                            <label>Vencimento:</label>
+                            <input type="text" v-model="bill.date_due | dateFormat 'pt-BR'" placeholder="Informe a Data"/>
+                        </div>
+                        <div class="input-field col s4">
+                            <label>Valor:</label>
+                        <input type="text" v-model="bill.value | numberFormat 'pt-BR' 'BRL'"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label>Nome:</label>
+                        <select v-model="bill.name" id="name" class="browser-default">
+                        <option value="" disabled selected>Escolha um nome</option>
+                            <option v-for="b in names" :value="b">{{ b }}</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <input type="checkbox" class="filled-in" v-model="bill.done" id="pago"/>
+                        <label for="pago">Pago?</label>
+                    </div>
+                    <input type="submit" value="Enviar"/>
+                </form>
+            </div>
+        </div>
+        
     `,
     data() {
         return {
             formType: 'insert',
             names: namesPay,
             bill: new Bill()
-
         };
     },
     created(){
@@ -40,6 +51,9 @@ window.billPayCreateComponent = Vue.extend({
             this.formType = 'update';
             this.getBill(this.$route.params.id); //:id da rota update
         }
+        $(document).ready(function(){
+            $('#name').material_select();
+        });
     },
     methods: {
         submit(){

@@ -17,10 +17,19 @@ window.billPayComponent = Vue.extend({
             color: gray;
         }
     </style>
-        <h1>{{ title }}</h1>
-        <h3 :class="{'gray': status === false, 'green': status === 0, 'red': status > 0}">{{ status | statusGeneral 0 }}</h3>
-        <h3>{{ total | numberFormat }}</h3>
-        <menu-component></menu-component>
+    <div class="section">
+        <div class="container">
+            <h1>{{ title }}</h1>
+            <h3 :class="{'gray': status === false, 'green': status === 0, 'red': status > 0}">{{ status | statusGeneral 0 }}</h3>
+            <div class="row">
+                <div class="col s5 offset-s1">
+                    <h3>{{ total | numberFormat 'pt-BR' 'BRL' }}</h3>
+                </div>
+            </div>
+                <menu-component></menu-component>
+        
+</div>
+    </div>
         <router-view></router-view>
     `,
     data(){
