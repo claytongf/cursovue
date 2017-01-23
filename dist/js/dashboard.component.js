@@ -1,7 +1,7 @@
 "use strict";
 
 window.dashboard = Vue.extend({
-    template: "\n        <style type=\"text/css\">\n            .pago{\n                color: green;\n            }\n            .nao-pago{\n                color:red;\n            }\n        </style>\n        <h1>{{ title }}</h1>\n        <p>Total de Contas a Pagar: {{ total.pay | numberFormat }}</p>\n        <p>Total de Contas Pagas: {{ total.payed | numberFormat }}</p>\n        <p>Total de Contas a Receber: {{ total.receive | numberFormat }} </p>\n        <p>Total de Contas Recebidas: {{ total.received | numberFormat }}</p>\n    ",
+    template: "\n        <h2>{{ title }}</h2>\n        <div class=\"row\">\n            <div class=\"col s4\">\n                <div class=\"card custom-blue\">\n                    <div class=\"card-content white-text\">\n                        <p>Total de Contas a Pagar: {{ total.pay | numberFormat }}</p>\n                        <p>Total de Contas Pagas: {{ total.payed | numberFormat }}</p>\n                        <p>Total de Contas a Receber: {{ total.receive | numberFormat }} </p>\n                        <p>Total de Contas Recebidas: {{ total.received | numberFormat }}</p>\n                    </div>\n                </div>\n            </div>\n        </div>\n    ",
     data: function data() {
         return {
             title: "Dashboard",

@@ -24,7 +24,7 @@ window.billReceiveCreateComponent = Vue.extend({
         submit: function submit() {
             var _this = this;
 
-            var data = this.bill.toJSON();
+            var data = this.bill;
             if (this.formType == 'insert') {
                 BillReceive.save({}, data).then(function (response) {
                     Materialize.toast('Conta Criada com Sucesso!', 4000);

@@ -23,10 +23,10 @@ window.billPayListComponent = Vue.extend({
                             <td>{{ o.date_due | dateFormat 'pt-BR' }}</td>
                             <td>{{ o.name }}</td>
                             <td>{{ o.value | numberFormat 'pt-BR' 'BRL' }}</td>
-                            <td class="white-text" :class="{'green lighten-2': o.done, 'red lighten-2': !o.done}">{{ o.done | doneLabel }}</td>
+                            <td class="white-text" :class="{'pago': o.done, 'naopago': !o.done}">{{ o.done | doneLabel }}</td>
                             <td>
-                                <a href="#" v-link="{name: 'bill-pay.update', params: {id: o.id}}">Editar</a> |
-                                <a href="#" @click.prevent="openModalDelete(o)">Deletar</a>
+                                <a class="text-success" href="#" v-link="{name: 'bill-pay.update', params: {id: o.id}}">Editar</a> |
+                                <a class="text-danger" href="#" @click.prevent="openModalDelete(o)">Deletar</a>
                             </td>
                         </tr>
                         </tbody>

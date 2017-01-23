@@ -7,6 +7,22 @@
 
 @import "node_modules/materialize-css/sass/materialize";
 
-.my-custom-green{
-  @extend .green, .darken-1
+.custom-blue{
+  @extend .blue, .lighten-2;
+}
+
+.text-danger{
+  @extend .red-text, .text-darken-4;
+}
+
+.text-success{
+  @extend .blue-text, .text-lighten-2;
+}
+
+.pago{
+  @extend .green, .text-darken-4;
+}
+
+.naopago{
+  @extend .red, .text-darken-4;
 }

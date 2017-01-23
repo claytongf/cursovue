@@ -1,18 +1,18 @@
 window.dashboard = Vue.extend({
     template: `
-        <style type="text/css">
-            .pago{
-                color: green;
-            }
-            .nao-pago{
-                color:red;
-            }
-        </style>
-        <h1>{{ title }}</h1>
-        <p>Total de Contas a Pagar: {{ total.pay | numberFormat }}</p>
-        <p>Total de Contas Pagas: {{ total.payed | numberFormat }}</p>
-        <p>Total de Contas a Receber: {{ total.receive | numberFormat }} </p>
-        <p>Total de Contas Recebidas: {{ total.received | numberFormat }}</p>
+        <h2>{{ title }}</h2>
+        <div class="row">
+            <div class="col s4">
+                <div class="card custom-blue">
+                    <div class="card-content white-text">
+                        <p>Total de Contas a Pagar: {{ total.pay | numberFormat }}</p>
+                        <p>Total de Contas Pagas: {{ total.payed | numberFormat }}</p>
+                        <p>Total de Contas a Receber: {{ total.receive | numberFormat }} </p>
+                        <p>Total de Contas Recebidas: {{ total.received | numberFormat }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     `,
     data: function (){
         return {
