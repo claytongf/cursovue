@@ -7,7 +7,7 @@ const namesPay = [
     'Empréstimo',
     'Gasolina'
 ];
-window.billPayCreateComponent = Vue.extend({
+module.exports = {
     template: `
         <div class="container">
             <div class="row">
@@ -92,4 +92,4 @@ window.billPayCreateComponent = Vue.extend({
             return dateDueObject.toISOString().split('T')[0];
         }
     }
-});
+};

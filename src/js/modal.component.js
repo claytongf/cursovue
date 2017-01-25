@@ -1,4 +1,4 @@
-window.modalComponent = Vue.extend({
+module.exports = {
     template: `
         <div :id="modal.id" class="modal">
             <div class="modal-content">
@@ -25,4 +25,4 @@ window.modalComponent = Vue.extend({
             $(`#${id}`).modal();
         });
     }
-});
+};

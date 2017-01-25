@@ -7,7 +7,7 @@ const namesReceive = [
     'Herança',
     'Outros'
 ];
-window.billReceiveCreateComponent = Vue.extend({
+module.exports = {
     template: `
 <div class="container">
             <div class="row">
@@ -63,7 +63,7 @@ window.billReceiveCreateComponent = Vue.extend({
     },
     methods: {
         submit(){
-            let data = this.bill;
+            let data = this.bill.toJSON();
             if(this.formType == 'insert'){
                 BillReceive.save({}, data).then((response) => {
                     Materialize.toast('Conta Criada com Sucesso!', 4000);
@@ -80,7 +80,7 @@ window.billReceiveCreateComponent = Vue.extend({
         },
         getBill(id){
             BillReceive.get({id: id}).then((response) => {
-                this.bill = response.data;
+                this.bill = new Bill(response.data);
             });
         },
         getDateDue(date_due){
@@ -91,4 +91,4 @@ window.billReceiveCreateComponent = Vue.extend({
             return dateDueObject.toISOString().split('T')[0];
         }
     }
-});
+};

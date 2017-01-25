@@ -1,4 +1,4 @@
-window.dashboard = Vue.extend({
+module.exports = {
     template: `
         <h2>{{ title }}</h2>
         <div class="row">
@@ -43,4 +43,4 @@ window.dashboard = Vue.extend({
             self.total.payed= response.data.total
         });
     }
-});
+};
