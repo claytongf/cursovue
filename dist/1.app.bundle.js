@@ -1,9 +1,6 @@
-webpackJsonp([1],[
-/* 0 */,
-/* 1 */,
-/* 2 */,
-/* 3 */,
-/* 4 */
+webpackJsonp([1],{
+
+/***/ 27:
 /***/ function(module, exports) {
 
 	"use strict";
@@ -59,12 +56,13 @@ webpackJsonp([1],[
 	};
 
 /***/ },
-/* 5 */
+
+/***/ 28:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var modalComponent = __webpack_require__(6);
+	var modalComponent = __webpack_require__(29);
 	module.exports = {
 	    components: {
 	        'modal': modalComponent
@@ -106,7 +104,8 @@ webpackJsonp([1],[
 	};
 
 /***/ },
-/* 6 */
+
+/***/ 29:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -132,12 +131,14 @@ webpackJsonp([1],[
 	};
 
 /***/ },
-/* 7 */
-/***/ function(module, exports) {
+
+/***/ 30:
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var namesPay = ['Conta de luz', 'Conta de água', 'Conta de telefone', 'Supermercado', 'Cartão de crédito', 'Empréstimo', 'Gasolina'];
+	var Bill = __webpack_require__(31);
 	module.exports = {
 	    template: '\n        <div class="container">\n            <div class="row">\n                <form name="form" v-on:submit.prevent="submit">\n                    <div class="row">\n                        <h2>Nova Conta</h2>\n                        <div class="input-field col s6">\n                            <label class="active">Vencimento:</label>\n                            <input type="text" v-model="bill.date_due | dateFormat \'pt-BR\'" placeholder="Informe a Data"/>\n                        </div>\n                        <div class="input-field col s6">\n                            <label class="active">Valor:</label>\n                        <input type="text" v-model="bill.value | numberFormat \'pt-BR\' \'BRL\'"/>\n                        </div>\n                    </div>\n                    <div class="row">\n                        <div class="input-field col s6">\n                            <label class="active">Nome:</label>\n                            <select v-model="bill.name" id="name" class="browser-default">\n                            <option value="" disabled selected>Escolha um nome</option>\n                                <option v-for="b in names" :value="b">{{ b }}</option>\n                            </select>\n                        </div>\n                        <div class="input-field col s6">\n                            <input type="checkbox" class="filled-in" v-model="bill.done" id="pago"/>\n                            <label for="pago">Pago?</label>\n                        </div>\n                    </div>\n                    <div class="row">\n                        <div class="input-field col s12">\n                            <input type="submit" value="Enviar" class="btn btn-large right"/>\n                        </div>\n                    </div>\n                </form>\n            </div>\n        </div>\n        \n    ',
 	    data: function data() {
@@ -152,9 +153,9 @@ webpackJsonp([1],[
 	            this.formType = 'update';
 	            this.getBill(this.$route.params.id); //:id da rota update
 	        }
-	        $(document).ready(function () {
-	            $('#name').material_select();
-	        });
+	    },
+	    ready: function ready() {
+	        $('#name').material_select();
 	    },
 
 	    methods: {
@@ -194,36 +195,48 @@ webpackJsonp([1],[
 	};
 
 /***/ },
-/* 8 */
+
+/***/ 31:
 /***/ function(module, exports) {
 
 	'use strict';
 
-	module.exports = {
-	    template: '\n        <ul v-bind:id="o.id" class="dropdown-content" v-for="o in menusDropdown">\n            <li v-for="item in o.items">\n                <a v-link="{name: item.routeName}">{{ item.name }}</a>\n            </li>\n        </ul>\n        <div class="navbar-fixed">\n            <nav>\n                <div class="nav-wrapper container">\n                    <a href="#" class="right brand-logo">Code Contas</a>\n                    <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>\n                    <ul class="left hide-on-med-and-down">\n                        <li v-for="o in menus">\n                            <!--<a href="#" v-link="{path: o.url}">{{ o.name }}</a>-->\n                            <a href="!#" v-if="o.dropdownId" class="dropdown-button" v-bind:data-activates="o.dropdownId">{{ o.name }} <i class="material-icons right">arrow_drop_down</i> </a>\n                            <a v-else v-link="{name: o.routeName}">{{ o.name }}</a>\n                        </li>\n                    </ul>\n                    <ul id="nav-mobile" class="side-nav">\n                        <li v-for="o in menus">\n                            <!--<a href="#" v-link="{path: o.url}">{{ o.name }}</a>-->\n                            <a href="#" v-link="{name: o.routeName}">{{ o.name }}</a>\n                        </li>\n                    </ul>\n                </div>\n            </nav>\n        </div>\n        <modal></modal>\n        <router-view></router-view>\n    ',
-	    created: function created() {
-	        $(document).ready(function () {
-	            $('.button-collapse').sideNav();
-	            $('.dropdown-button').dropdown();
-	        });
-	    },
-	    data: function data() {
-	        return {
-	            menus: [{ id: 0, name: "Dashboard", routeName: 'bill.dashboard' }, { name: "Contas a pagar", routeName: 'bill-pay.list', dropdownId: 'bill-pay' }, { name: "Contas a receber", routeName: 'bill-receive.list', dropdownId: 'bill-receive' }],
-	            menusDropdown: [{
-	                id: 'bill-pay', items: [
-	                // {id: 0, name: "Listar contas", url: '/bills'},
-	                // {id: 1, name: "Criar conta", url: '/bill/create'}
-	                { id: 0, name: "Listar contas", routeName: 'bill-pay.list' }, { id: 1, name: "Criar conta", routeName: 'bill-pay.create' }]
-	            }, {
-	                id: 'bill-receive', items: [{ id: 0, name: "Listar contas", routeName: 'bill-receive.list' }, { id: 1, name: "Criar conta", routeName: 'bill-receive.create' }]
-	            }]
-	        };
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	module.exports = function () {
+	    function Bill() {
+	        var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+	        _classCallCheck(this, Bill);
+
+	        this.date_due = '';
+	        this.name = '';
+	        this.value = 0;
+	        this.done = false;
+	        Object.assign(this, data);
 	    }
-	};
+
+	    _createClass(Bill, [{
+	        key: 'toJSON',
+	        value: function toJSON() {
+	            var date_due = typeof this.date_due === 'string' && this.date_due.length == 10 ? this.date_due : this.date_due.toISOString().substring(0, 10);
+	            return {
+	                date_due: date_due,
+	                name: this.name,
+	                value: this.value,
+	                done: this.done
+	            };
+	        }
+	    }]);
+
+	    return Bill;
+	}();
 
 /***/ },
-/* 9 */
+
+/***/ 32:
 /***/ function(module, exports) {
 
 	"use strict";
@@ -279,12 +292,13 @@ webpackJsonp([1],[
 	};
 
 /***/ },
-/* 10 */
+
+/***/ 33:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var modalComponent = __webpack_require__(6);
+	var modalComponent = __webpack_require__(29);
 	module.exports = {
 	    components: {
 	        'modal': modalComponent
@@ -326,12 +340,14 @@ webpackJsonp([1],[
 	};
 
 /***/ },
-/* 11 */
-/***/ function(module, exports) {
+
+/***/ 34:
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var namesReceive = ['Loteria', 'Recebimento', 'Aluguel', 'Ganhos', 'Salário', 'Herança', 'Outros'];
+	var Bill = __webpack_require__(31);
 	module.exports = {
 	    template: '\n<div class="container">\n            <div class="row">\n                <form name="form" v-on:submit.prevent="submit">\n                    <div class="row">\n                        <h2>Novo Recebimento</h2>\n                        <div class="input-field col s6">\n                            <label class="active">Vencimento:</label>\n                            <input type="text" v-model="bill.date_due | dateFormat \'pt-BR\'" placeholder="Informe a Data"/>\n                        </div>\n                        <div class="input-field col s6">\n                            <label class="active">Valor:</label>\n                        <input type="text" v-model="bill.value | numberFormat \'pt-BR\' \'BRL\'"/>\n                        </div>\n                    </div>\n                    <div class="row">\n                        <div class="input-field col s6">\n                            <label class="active">Nome:</label>\n                            <select v-model="bill.name" id="name" class="browser-default">\n                            <option value="" disabled selected>Escolha um nome</option>\n                                <option v-for="b in names" :value="b">{{ b }}</option>\n                            </select>\n                        </div>\n                        <div class="input-field col s6">\n                            <input type="checkbox" class="filled-in" v-model="bill.done" id="pago"/>\n                            <label for="pago">Pago?</label>\n                        </div>\n                    </div>\n                    <div class="row">\n                        <div class="input-field col s12">\n                            <input type="submit" value="Enviar" class="btn btn-large right"/>\n                        </div>\n                    </div>\n                </form>\n            </div>\n        </div>\n    ',
 	    data: function data() {
@@ -346,9 +362,9 @@ webpackJsonp([1],[
 	            this.formType = 'update';
 	            this.getBill(this.$route.params.id); //:id da rota update
 	        }
-	        $(document).ready(function () {
-	            $('#name').material_select();
-	        });
+	    },
+	    ready: function ready() {
+	        $('#name').material_select();
 	    },
 
 	    methods: {
@@ -388,7 +404,8 @@ webpackJsonp([1],[
 	};
 
 /***/ },
-/* 12 */
+
+/***/ 35:
 /***/ function(module, exports) {
 
 	"use strict";
@@ -426,5 +443,34 @@ webpackJsonp([1],[
 	    }
 	};
 
+/***/ },
+
+/***/ 36:
+/***/ function(module, exports) {
+
+	'use strict';
+
+	module.exports = {
+	    template: '\n        <ul v-bind:id="o.id" class="dropdown-content" v-for="o in menusDropdown">\n            <li v-for="item in o.items">\n                <a v-link="{name: item.routeName}">{{ item.name }}</a>\n            </li>\n        </ul>\n        <div class="navbar-fixed">\n            <nav>\n                <div class="nav-wrapper container">\n                    <a href="#" class="right brand-logo">Code Contas</a>\n                    <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>\n                    <ul class="left hide-on-med-and-down">\n                        <li v-for="o in menus">\n                            <!--<a href="#" v-link="{path: o.url}">{{ o.name }}</a>-->\n                            <a href="!#" v-if="o.dropdownId" class="dropdown-button" v-bind:data-activates="o.dropdownId">{{ o.name }} <i class="material-icons right">arrow_drop_down</i> </a>\n                            <a v-else v-link="{name: o.routeName}">{{ o.name }}</a>\n                        </li>\n                    </ul>\n                    <ul id="nav-mobile" class="side-nav">\n                        <li v-for="o in menus">\n                            <!--<a href="#" v-link="{path: o.url}">{{ o.name }}</a>-->\n                            <a href="#" v-link="{name: o.routeName}">{{ o.name }}</a>\n                        </li>\n                    </ul>\n                </div>\n            </nav>\n        </div>\n        <modal></modal>\n        <router-view></router-view>\n    ',
+	    ready: function ready() {
+	        $('.button-collapse').sideNav();
+	        $('.dropdown-button').dropdown();
+	    },
+	    data: function data() {
+	        return {
+	            menus: [{ id: 0, name: "Dashboard", routeName: 'bill.dashboard' }, { name: "Contas a pagar", routeName: 'bill-pay.list', dropdownId: 'bill-pay' }, { name: "Contas a receber", routeName: 'bill-receive.list', dropdownId: 'bill-receive' }],
+	            menusDropdown: [{
+	                id: 'bill-pay', items: [
+	                // {id: 0, name: "Listar contas", url: '/bills'},
+	                // {id: 1, name: "Criar conta", url: '/bill/create'}
+	                { id: 0, name: "Listar contas", routeName: 'bill-pay.list' }, { id: 1, name: "Criar conta", routeName: 'bill-pay.create' }]
+	            }, {
+	                id: 'bill-receive', items: [{ id: 0, name: "Listar contas", routeName: 'bill-receive.list' }, { id: 1, name: "Criar conta", routeName: 'bill-receive.create' }]
+	            }]
+	        };
+	    }
+	};
+
 /***/ }
-]);
+
+});

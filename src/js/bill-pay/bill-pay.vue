@@ -1,5 +1,4 @@
-module.exports = {
-    template: `
+<template>
     <div class="section">
         <div class="container">
             <h4>{{ title }}</h4>
@@ -26,46 +25,50 @@ module.exports = {
     </div>
     <div class="divider"></div>
     <router-view></router-view>
-    `,
-    data(){
-        return {
-            title: "Contas a pagar",
-            status: false,
-            total: 0
-        }
-    },
-    created(){
-        this.updateStatus();
-        this.updateTotal();
-    },
-    methods: {
-        calculateStatus(bills){
-            if(!bills.length){
-                this.status = false;
+</template>
+<script type="text/javascript">
+    import {BillResourcePay} from '../resources.vue';
+    export default {
+        data(){
+            return {
+                title: "Contas a pagar",
+                status: false,
+                total: 0
             }
-            let count = 0;
-            for(let i in bills){
-                if(!bills[i].done){
-                    count++;
-                }
-            }
-            this.status = count;
         },
-        updateStatus(){
-            BillPay.query().then((response) => {
-                this.calculateStatus(response.data);
-            });
-        },
-        updateTotal(){
-            BillPay.total().then((response) => {
-                this.total = response.data.total;
-            });
-        }
-    },
-    events: {
-        'change-info'(){
+        created(){
             this.updateStatus();
             this.updateTotal();
+        },
+        methods: {
+            calculateStatus(bills){
+                if(!bills.length){
+                    this.status = false;
+                }
+                let count = 0;
+                for(let i in bills){
+                    if(!bills[i].done){
+                        count++;
+                    }
+                }
+                this.status = count;
+            },
+            updateStatus(){
+                BillResourcePay.query().then((response) => {
+                    this.calculateStatus(response.data);
+                });
+            },
+            updateTotal(){
+                BillResourcePay.total().then((response) => {
+                    this.total = response.data.total;
+                });
+            }
+        },
+        events: {
+            'change-info'(){
+                this.updateStatus();
+                this.updateTotal();
+            }
         }
-    }
-};
+    };
+</script>

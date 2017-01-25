@@ -1,5 +1,4 @@
-module.exports = {
-    template: `
+<template>
         <h2>{{ title }}</h2>
         <div class="row">
             <div class="col s4">
@@ -13,7 +12,12 @@ module.exports = {
                 </div>
             </div>
         </div>
-    `,
+
+</template>
+<script type="text/javascript">
+import {BillResourcePay} from './resources.vue';
+import {BillResourceReceive} from './resources.vue';
+export default {
     data: function (){
         return {
             title: "Dashboard",
@@ -27,20 +31,21 @@ module.exports = {
     },
     created: function(){
         let self = this;
-        BillReceive.total().then(function(response){
+        BillResourceReceive.total().then(function(response){
             self.total.receive = response.data.total
         });
 
-        BillReceive.totalReceived().then(function(response){
+        BillResourceReceive.totalReceived().then(function(response){
             self.total.received = response.data.total
         });
 
-        BillPay.total().then(function(response){
+        BillResourcePay.total().then(function(response){
             self.total.pay = response.data.total
         });
 
-        BillPay.totalPayed().then(function(response){
+        BillResourcePay.totalPayed().then(function(response){
             self.total.payed= response.data.total
         });
     }
 };
+</script>
