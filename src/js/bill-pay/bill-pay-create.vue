@@ -36,7 +36,7 @@
     </div>
 </template>
 <script type="text/javascript">
-    import {BillResourcePay} from '../resources.vue';
+    import {BillResourcePay} from '../resources';
     import {Bill} from '../billClass.vue';
     const namesPay = [
         'Conta de luz',

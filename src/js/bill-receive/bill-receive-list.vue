@@ -47,7 +47,7 @@
     </modal>
 </template>
 <script type="text/javascript">
-    import {BillResourceReceive} from '../resources.vue';
+    import {BillResourceReceive} from '../resources';
     import modalComponent from '../modal.vue';
     export default {
         components: {

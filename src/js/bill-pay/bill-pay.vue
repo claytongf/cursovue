@@ -27,7 +27,7 @@
     <router-view></router-view>
 </template>
 <script type="text/javascript">
-    import {BillResourcePay} from '../resources.vue';
+    import {BillResourcePay} from '../resources';
     export default {
         data(){
             return {

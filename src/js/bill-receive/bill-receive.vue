@@ -28,7 +28,7 @@
     <router-view></router-view>
 </template>
 <script type="text/javascript">
-    import {BillResourceReceive} from '../resources.vue';
+    import {BillResourceReceive} from '../resources';
     export default {
         data(){
             return {

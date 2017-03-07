@@ -15,8 +15,8 @@
 
 </template>
 <script type="text/javascript">
-import {BillResourcePay} from './resources.vue';
-import {BillResourceReceive} from './resources.vue';
+import {BillResourcePay} from './resources';
+import {BillResourceReceive} from './resources';
 export default {
     data: function (){
         return {
